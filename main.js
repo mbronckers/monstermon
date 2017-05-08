@@ -1,1 +1,2 @@
-hello
+/* Main JavaScript File
+ */
