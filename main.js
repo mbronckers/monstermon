@@ -37,12 +37,14 @@ var map = {
             1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1,
             1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1,
             1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1  
-    ],
+            ],
     getTile: function(col, row) {
         return this.tiles[row * map.cols + col];
     }
 };
 
+var img = new Image();
+img.src = "Graphics/tileset-citrine.png";
 window.onload = function() {
     canvas = document.getElementById("gameCanvas");
     ctx = canvas.getContext("2d");
@@ -57,13 +59,13 @@ function drawMap() {
             var tile = map.getTile(r, c);
             if (tile !== 0) {
                 ctx.drawImage(
-                    tileAtlas,
+                    img,
                     (tile - 1) * map.tileSize,
                     0,
                     map.tileSize,
                     map.tileSize,
-                    c * map.tileSize,
                     r * map.tileSize,
+                    c * map.tileSize,
                     map.tileSize,
                     map.tileSize
                 );
