@@ -1,0 +1,26 @@
+html {
+	background-color: white;
+	color: black;
+}
+
+div {
+	width: 80%;
+	height: auto;
+	margin-left: 10%; /* a 10% margin left and right */
+	margin-right: 10%;
+}
+
+#encapsulation {
+	width: 80%;
+	margin: auto;
+}
+
+#canvas {
+	width: 1024px;
+	height: 1024px;
+	margin: auto;
+}
+
+#game {
+	padding: 10px; /* a 10px padding around the HTML canvas for the game */
+}
