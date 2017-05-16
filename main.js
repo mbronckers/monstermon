@@ -168,7 +168,7 @@ function drawMap() {
 // Keyboard listener
 //
 
-var KEY = { W: 87, A: 65, S: 83, D: 68, SPACE: 32, LK: 37, RK: 39, UK: 38, DK: 40};
+var KEY = {W: 87, A: 65, S: 83, D: 68, SPACE: 32, LK: 37, RK: 39, UK: 38, DK: 40};
 
 document.addEventListener('keydown', function(e) { 
 		switch(e.keyCode) {
