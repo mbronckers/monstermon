@@ -33,22 +33,6 @@ var healthCenter = 49;
 var healthCenterX;
 var healthCenterY;
 
-var sand;
-var sandX;
-var sandY;
-
-var water;
-var waterX;
-var waterY;
-
-var fence;
-var fenceX;
-var fenceY;
-
-var stone;
-var stoneX;
-var stoneY;
-
 var map = {cols: 16, rows: 16, tileSize: 16,
     tiles: [
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -151,6 +135,12 @@ Player
 
 var player = {x: 0, y: 0, orientation: 1, tileSize: 32, map: alpha, backpack: [], hp: 100, money: 0}
 
+
+/* --------------------------------------
+Movement 
+----------------------------------------*/
+
+var movementTiles = [0, 6, 7, 8, 9, 10, 30, 31, 32];
 
 
 /* --------------------------------------
