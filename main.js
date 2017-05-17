@@ -76,9 +76,8 @@ window.onload = function() {
     drawMap();
 }
 
-/* drawMap() function:
-    ctx.drawImage(img,sx,sy,swidth,sheight,x,y,width,height); is used to take a specified part of an image
-*/
+// drawMap() function: ctx.drawImage(img,sx,sy,swidth,sheight,x,y,width,height); is used to take a specified part of an image
+
 function drawMap() {
     for (var r = 0; r < map.rows; r++) {
         for (var c = 0; c < map.cols; c++) {
@@ -99,23 +98,24 @@ function drawMap() {
                         (map.tileSize)		// tile height
                     );
                 }
-                
-                if (tile == tree) {            // a case for each type of tile in array --> tree tile
-                    ctx.drawImage(
-                        texture,            // image file source
-                        (treeY * map.tileSize), // the x coordinate of the image file to clip --> texture file tile's x position
-                        (treeX * map.tileSize), // the y coordinate of the image file to clip --> texture file tile's y position
-                        map.tileSize, 		// the width of the clipped image --> texture file tile's width
-                        map.tileSize,		// the height of the clipped image --> texture file tile's height
-                        c * (map.tileSize), 	// x position of tile on canvas
-                        r * (map.tileSize),	// y position of tile on canvas
-                        (map.tileSize),		// tile width
-                        (map.tileSize)		// tile height
-                    );
-                }
+            
             }
         }
     }
+}
+
+function drawPlayer() {
+        ctx.drawImage(
+            playerFile // image file source
+            0, 
+            0,
+            map.tileSize,
+            map.tileSize,
+            player.x * map.tileSize,
+            player.y * map.tileSize,
+            map.tileSize,
+            map.tileSize
+            );
 }
 
 /* --------------------------------------
@@ -147,6 +147,7 @@ Player
 ----------------------------------------*/
 
 var player = {x: 0, y: 0, map: alpha, backpack: [], hp: 100, money: 0}
+
 
 
 /* --------------------------------------
