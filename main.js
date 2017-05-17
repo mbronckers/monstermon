@@ -16,8 +16,11 @@ Graphic variables
 ----------------------------------------*/
 
 var texture = new Image();
-texture.src = "Graphics/tileset-citrine.png"; // file path to external texture files
+texture.src = "Graphics/TexturePack.png"; 
+var playerImg = new Image();
+playerImg.src = "Graphics/player.png"// file path to external texture files
 
+<<<<<<< HEAD
 var user = new Image();
 user.src = "Graphics/user.png";             // file path to tiles for the player
 
@@ -50,17 +53,49 @@ var map = {cols: 16, rows: 16, tileSize: 16,
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+=======
+var map = {cols: 16, rows: 16, tileSize: 16,
+    tiles: [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+>>>>>>> CSS
     ],
     getTile: function(row, col) {
         return this.tiles[row][col];
     }
 };
 
+var player = {x: 200, y: 200};
+
 window.onload = function() {
     canvas = document.getElementById("game");
     ctx = canvas.getContext("2d");
     
-    drawMap();
+    
+    
+    setInterval(function() {
+        canvas.width = canvas.width;
+        drawMap();
+        drawPlayer();
+    }, 1000/30);
+    
+    
+    document.addEventListener('keydown', keyPressed);
 }
 
 // drawMap() function: ctx.drawImage(img,sx,sy,swidth,sheight,x,y,width,height); is used to take a specified part of an image
@@ -71,6 +106,7 @@ function drawMap() {
             var tile = map.getTile(r, c);
             
             if (tile != -1) { // a value of -1 in the map array means empty tile
+<<<<<<< HEAD
                 
                 if (tile == grass) {            // a case for each type of tile in array --> grass tile
                     ctx.drawImage(
@@ -86,12 +122,27 @@ function drawMap() {
                     );
                 }
             
+=======
+                    ctx.drawImage(
+                        texture,            // image file source
+                        0, // the x coordinate of the image file to clip --> texture file tile's x position
+                        (tile * map.tileSize), // the y coordinate of the image file to clip --> texture file tile's y position
+                        map.tileSize, 		// the width of the clipped image --> texture file tile's width
+                        map.tileSize,		// the height of the clipped image --> texture file tile's height
+                        c * (map.tileSize * 2), 	// x position of tile on canvas
+                        r * (map.tileSize * 2),	// y position of tile on canvas
+                        map.tileSize * 2,		// tile width
+                        map.tileSize * 2		// tile height
+                    );
+
+>>>>>>> CSS
             }
         }
     }
 }
 
 function drawPlayer() {
+<<<<<<< HEAD
         ctx.drawImage(
             user // image file source
             0, 
@@ -108,25 +159,47 @@ function drawPlayer() {
 /* --------------------------------------
 Keyboard Listener
 ----------------------------------------*/
+=======
+    ctx.drawImage(
+        playerImg,
+        0,
+        0,
+        map.tileSize,
+        map.tileSize,
+        player.x * 2,
+        player.y * 2,
+        map.tileSize * 2,
+        map.tileSize * 2
+    );
+}
+
+//
+// Keyboard listener
+//
+>>>>>>> CSS
 
 var KEY = {W: 87, A: 65, S: 83, D: 68, SPACE: 32, LK: 37, RK: 39, UK: 38, DK: 40};
 
-document.addEventListener('keydown', function(e) { 
+function keyPressed(e) {
 		switch(e.keyCode) {
 			case KEY.W:
 			case KEY.UK:
-				//code to move player here
+                player.y -= 5;
 				break;
 			case KEY.A:
 			case KEY.LK:
-				//code to move player here
+				player.x -= 5;
 				break;
 			case KEY.S:
 			case KEY.DK:
-				//code here
+				player.y += 5;
+				break;
+            case KEY.D:
+			case KEY.RK:
+				player.x += 5;
 				break;
             }
-});
+}
 
 
 /* --------------------------------------
