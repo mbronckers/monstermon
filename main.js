@@ -18,6 +18,9 @@ Graphic variables
 var texture = new Image();
 texture.src = "Graphics/tileset-citrine.png"; // file path to external texture files
 
+var user = new Image();
+user.src = "Graphics/user.png";             // file path to tiles for the player
+
 var grass = 12;								// the value of element in array [non-fighting grass]
 var grassX = 0;								// the x start location of grass tile in texture file --> meant for clipping
 var grassY = 3;                             // the y start location of grass tile in texture file --> meant for clipping
@@ -106,11 +109,11 @@ function drawMap() {
 
 function drawPlayer() {
         ctx.drawImage(
-            playerFile // image file source
+            user // image file source
             0, 
-            0,
-            map.tileSize,
-            map.tileSize,
+            player.orientation * player.tileSize,
+            player.tileSize,
+            player.tileSize,
             player.x * map.tileSize,
             player.y * map.tileSize,
             map.tileSize,
@@ -146,7 +149,7 @@ document.addEventListener('keydown', function(e) {
 Player
 ----------------------------------------*/
 
-var player = {x: 0, y: 0, map: alpha, backpack: [], hp: 100, money: 0}
+var player = {x: 0, y: 0, orientation: 1, tileSize: 32, map: alpha, backpack: [], hp: 100, money: 0}
 
 
 
