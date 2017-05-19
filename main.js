@@ -39,9 +39,30 @@ var map = {cols: 16, rows: 16, tileSize: 16,
         [1, 23, 26, 26, 29, 0, 31, 31, 31, 31, 31, 31, 31, 31, 0, 1],
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
+    ], 
+    second: [
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ],
     getTile: function(row, col) {
         return this.tiles[row][col];
+    },
+    getTileSecond: function(row, col) {
+    	return this.second[row][col];
     }
 };
 
@@ -55,7 +76,6 @@ window.onload = function() {
         drawMap();
         drawPlayer();
     }, 1000/30);
-    
     
     document.addEventListener('keydown', keyPressed);
 }
@@ -82,6 +102,28 @@ function drawMap() {
                     );
             }
         }
+    }
+
+    // second array/layer
+
+    for (var r = 0; r < map.rows; r++) {
+    	for (var c = 0; c < map.cols; c++) {
+    		var tile = map.getTileSecond(r, c);
+
+    		if (tile != 0) { // a value of 0 in the second layer array means empty tile
+    			ctx.drawImage(
+    				texture,
+    				0,
+    				(tile * map.tileSize),
+    				map.tileSize, 		// the width of the clipped image --> texture file tile's width
+                    map.tileSize,		// the height of the clipped image --> texture file tile's height
+                    c * (map.tileSize * 2), 	// x position of tile on canvas
+                    r * (map.tileSize * 2),	// y position of tile on canvas
+               	    map.tileSize * 2,		// tile width
+   		   	        map.tileSize * 2		// tile height
+    				);
+    		} 
+    	}
     }
 }
 
