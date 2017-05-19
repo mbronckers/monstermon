@@ -13,7 +13,7 @@ ____________________________________________________________________
 var texture = new Image();
 texture.src = "Graphics/TexturePack.png"; 
 var playerImg = new Image();
-playerImg.src = "Graphics/player.png"// file path to external texture files
+playerImg.src = "Graphics/user.png"// file path to external texture files
 
 var map = {cols: 16, rows: 16, tileSize: 16,
     tiles: [
@@ -91,10 +91,10 @@ function drawPlayer() {
         0,
         map.tileSize,
         map.tileSize,
-        player.x * 2,
-        player.y * 2,
-        map.tileSize * 2,
-        map.tileSize * 2
+        player.x,
+        player.y,
+        map.tileSize,
+        map.tileSize
     );
 }
 
@@ -108,19 +108,28 @@ function keyPressed(e) {
 		switch(e.keyCode) {
 			case KEY.W:
 			case KEY.UK:
-                player.y -= 5;
+                if (map.getTile(player.x / map.tileSize, player.y / map.tileSize - 1) != 1) {
+                    player.y -= 5;
+                }
+                
 				break;
 			case KEY.A:
 			case KEY.LK:
-				player.x -= 5;
+                if (map.getTile(player.x / map.tileSize - 1, player.y / map.tileSize) != 1) {
+				    player.x -= 5;
+                }
 				break;
 			case KEY.S:
 			case KEY.DK:
-				player.y += 5;
+                if (map.getTile(player.x / map.tileSize, player.y / map.tileSize + 1) != 1) {
+				    player.y += 5;
+                }
 				break;
             case KEY.D:
 			case KEY.RK:
-				player.x += 5;
+                if (map.getTile(player.x / map.tileSize + 1, player.y / map.tileSize) != 1) {
+				    player.x += 5;
+                }
 				break;
             }
 }
