@@ -20,12 +20,14 @@ texture.src = "Graphics/TexturePack.png";
 var playerImg = new Image();
 playerImg.src = "Graphics/user.png"// file path to external texture files
 
+var PokeMart = 64;
+
 var map = {cols: 16, rows: 16, tileSize: 16,
     tiles: [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1],
         [1, 2, 2, 2, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
         [1, 3, 3, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 30, 30, 0, 0, 0, 0, 1],
         [1, 0, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0, 0, 0, 0, 1],
         [1, 0, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0, 0, 0, 0, 1],
         [1, 0, 30, 30, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1],
@@ -41,7 +43,7 @@ var map = {cols: 16, rows: 16, tileSize: 16,
 
     ], 
     second: [
-    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 64, 0, 0, 0, 0, 0, 0],
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -110,7 +112,21 @@ function drawMap() {
     	for (var c = 0; c < map.cols; c++) {
     		var tile = map.getTileSecond(r, c);
 
-    		if (tile != 0) { // a value of 0 in the second layer array means empty tile
+    		if (tile == PokeMart) { // special case for building
+    			ctx.drawImage(
+    				texture,
+    				0,
+    				(tile * map.tileSize),
+    				4*map.tileSize, 		// the width of the clipped image --> texture file tile's width
+                    3*map.tileSize,		// the height of the clipped image --> texture file tile's height
+                    c * (map.tileSize * 2), 	// x position of tile on canvas
+                    r * (map.tileSize * 2),	// y position of tile on canvas
+               	    map.tileSize * 6,		// tile width
+   		   	        map.tileSize * 6		// tile height
+    				);
+    		}
+
+    		else if (tile != 0) { // a value of 0 in the second layer array means empty tile
     			ctx.drawImage(
     				texture,
     				0,
