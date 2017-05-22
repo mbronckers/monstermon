@@ -19,11 +19,8 @@ var texture = new Image();
 texture.src = "Graphics/TexturePack.png"; 
 var playerImg = new Image();
 playerImg.src = "Graphics/user.png"// file path to external texture files
-<<<<<<< HEAD
 
 var PokeMart = 64;
-=======
->>>>>>> CSS
 
 var map = {cols: 16, rows: 16, tileSize: 16,
     tiles: [
@@ -192,7 +189,6 @@ function drawMap() {
 }
 
 function drawPlayer() {
-<<<<<<< HEAD
         ctx.drawImage(
             playerImg, // image file source
             0, 
@@ -204,19 +200,6 @@ function drawPlayer() {
             map.tileSize * 2,
             map.tileSize * 2
             );
-=======
-    ctx.drawImage(
-        playerImg,
-        0,
-        0,
-        map.tileSize,
-        map.tileSize,
-        player.x,
-        player.y,
-        map.tileSize,
-        map.tileSize
-    );
->>>>>>> CSS
 }
 
 //
@@ -229,21 +212,6 @@ function keyPressed(e) {
 		switch(e.keyCode) {
 			case KEY.W:
 			case KEY.UK:
-<<<<<<< HEAD
-                player.y -= 1;
-				break;
-			case KEY.A:
-			case KEY.LK:
-				player.x -= 1;
-				break;
-			case KEY.S:
-			case KEY.DK:
-				player.y += 1;
-				break;
-            case KEY.D:
-			case KEY.RK:
-				player.x += 1;
-=======
                 if (map.getTile(player.x / map.tileSize, player.y / map.tileSize - 1) != 1) {
                     player.y -= 5;
                 }
@@ -266,7 +234,6 @@ function keyPressed(e) {
                 if (map.getTile(player.x / map.tileSize + 1, player.y / map.tileSize) != 1) {
 				    player.x += 5;
                 }
->>>>>>> CSS
 				break;
             }
 }
