@@ -68,6 +68,51 @@ var map = {cols: 16, rows: 16, tileSize: 16,
     }
 };
 
+var beta = {cols: 16, rows: 16, tileSize: 16,
+    tiles: [
+    	[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    	[1, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[1, 2, 2, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[1, 6, 6, 2, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0],
+    	[1, 30, 6, 2, 2, 2, 2, 6, 6, 6, 3, 0, 0, 3, 3, 3],
+    	[1, 30, 30, 6, 2, 6, 6, 6, 25, 6, 3, 3, 3, 6, 6, 6],
+    	[1, 30, 30, 6, 2, 6, 25, 25, 25, 6, 6, 6, 6, 6, 6, 3],
+    	[1, 30, 30, 6, 6, 6, 25, 25, 25, 25, 25, 25, 25, 25, 6, 3],
+    	[1, 30, 30, 6, 6, 6, 25, 25, 25, 25, 25, 25, 25, 6, 6, 3],
+    	[1, 30, 30, 6, 2, 6, 25, 25, 25, 25, 25, 25, 25, 6, 3, 3],
+    	[1, 30, 30, 6, 2, 6, 6, 25, 25, 25, 25, 25, 6, 6, 3, 0],
+    	[1, 30, 6, 3, 3, 3, 6, 25, 25, 25, 25, 25, 6, 3, 0, 0],
+    	[1, 6, 6, 31, 31, 3, 6, 25, 25, 25, 25, 25, 6, 3, 0, 0],
+    	[1, 31, 31, 31, 31, 3, 6, 6, 6, 6, 6, 6, 6, 3, 0, 0],
+    	[1, 31, 31, 31, 31, 31, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+    	[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    ], 
+    second: [
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 34, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    ],
+    getTile: function(row, col) {
+        return this.tiles[row][col];
+    },
+    getTileSecond: function(row, col) {
+    	return this.second[row][col];
+    }
+};
+
 window.onload = function() {
     canvas = document.getElementById("game");
     ctx = canvas.getContext("2d");
@@ -85,22 +130,22 @@ window.onload = function() {
 // drawMap() function: ctx.drawImage(img,sx,sy,swidth,sheight,x,y,width,height); is used to take a specified part of an image
 
 function drawMap() {
-    for (var r = 0; r < map.rows; r++) {
-        for (var c = 0; c < map.cols; c++) {
-            var tile = map.getTile(r, c);
+    for (var r = 0; r < player.map.rows; r++) {
+        for (var c = 0; c < player.map.cols; c++) {
+            var tile = player.map.getTile(r, c);
             
             if (tile != -1) { // a value of -1 in the map array means empty tile
 
                     ctx.drawImage(
                         texture,            // image file source
                         0, // the x coordinate of the image file to clip --> texture file tile's x position
-                        (tile * map.tileSize), // the y coordinate of the image file to clip --> texture file tile's y position
-                        map.tileSize, 		// the width of the clipped image --> texture file tile's width
-                        map.tileSize,		// the height of the clipped image --> texture file tile's height
+                        (tile * player.map.tileSize), // the y coordinate of the image file to clip --> texture file tile's y position
+                        player.map.tileSize, 		// the width of the clipped image --> texture file tile's width
+                        player.map.tileSize,		// the height of the clipped image --> texture file tile's height
                         c * (map.tileSize * 2), 	// x position of tile on canvas
                         r * (map.tileSize * 2),	// y position of tile on canvas
-                        map.tileSize * 2,		// tile width
-                        map.tileSize * 2		// tile height
+                        player.map.tileSize * 2,		// tile width
+                        player.map.tileSize * 2		// tile height
                     );
             }
         }
@@ -108,21 +153,21 @@ function drawMap() {
 
     // second array/layer
 
-    for (var r = 0; r < map.rows; r++) {
-    	for (var c = 0; c < map.cols; c++) {
-    		var tile = map.getTileSecond(r, c);
+    for (var r = 0; r < player.map.rows; r++) {
+    	for (var c = 0; c < player.map.cols; c++) {
+    		var tile = player.map.getTileSecond(r, c);
 
     		if (tile == PokeMart) { // special case for building
     			ctx.drawImage(
     				texture,
     				0,
-    				(tile * map.tileSize),
-    				4*map.tileSize, 		// the width of the clipped image --> texture file tile's width
-                    3*map.tileSize,		// the height of the clipped image --> texture file tile's height
-                    c * (map.tileSize * 2), 	// x position of tile on canvas
-                    r * (map.tileSize * 2),	// y position of tile on canvas
-               	    map.tileSize * 6,		// tile width
-   		   	        map.tileSize * 6		// tile height
+    				(tile * player.map.tileSize),
+    				4*player.map.tileSize, 		// the width of the clipped image --> texture file tile's width
+                    3*player.map.tileSize,		// the height of the clipped image --> texture file tile's height
+                    c * (player.map.tileSize * 2), 	// x position of tile on canvas
+                    r * (player.map.tileSize * 2),	// y position of tile on canvas
+               	    player.map.tileSize * 6,		// tile width
+   		   	        player.map.tileSize * 6		// tile height
     				);
     		}
 
@@ -130,13 +175,13 @@ function drawMap() {
     			ctx.drawImage(
     				texture,
     				0,
-    				(tile * map.tileSize),
-    				map.tileSize, 		// the width of the clipped image --> texture file tile's width
-                    map.tileSize,		// the height of the clipped image --> texture file tile's height
-                    c * (map.tileSize * 2), 	// x position of tile on canvas
-                    r * (map.tileSize * 2),	// y position of tile on canvas
-               	    map.tileSize * 2,		// tile width
-   		   	        map.tileSize * 2		// tile height
+    				(tile * player.map.tileSize),
+    				player.map.tileSize, 		// the width of the clipped image --> texture file tile's width
+                    player.map.tileSize,		// the height of the clipped image --> texture file tile's height
+                    c * (player.map.tileSize * 2), 	// x position of tile on canvas
+                    r * (player.map.tileSize * 2),	// y position of tile on canvas
+               	    player.map.tileSize * 2,		// tile width
+   		   	        player.map.tileSize * 2		// tile height
     				);
     		} 
     	}
@@ -189,7 +234,7 @@ function keyPressed(e) {
 Player
 ----------------------------------------*/
 
-var player = {x: 5, y: 5, orientation: 0, tileSize: 32, map: map, backpack: [], hp: 100, money: 0}
+var player = {x: 5, y: 5, orientation: 0, tileSize: 32, map: beta, backpack: [], hp: 100, money: 0}
 
 /* --------------------------------------
 Movement 
