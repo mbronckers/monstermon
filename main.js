@@ -21,15 +21,15 @@ var map = {cols: 16, rows: 16, tileSize: 16,
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 1],
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
@@ -40,7 +40,6 @@ var map = {cols: 16, rows: 16, tileSize: 16,
     }
 };
 
-var player = {x: 200, y: 200};
 
 window.onload = function() {
     canvas = document.getElementById("game");
@@ -73,10 +72,10 @@ function drawMap() {
                         (tile * map.tileSize), // the y coordinate of the image file to clip --> texture file tile's y position
                         map.tileSize, 		// the width of the clipped image --> texture file tile's width
                         map.tileSize,		// the height of the clipped image --> texture file tile's height
-                        c * (map.tileSize * 2), 	// x position of tile on canvas
-                        r * (map.tileSize * 2),	// y position of tile on canvas
-                        map.tileSize * 2,		// tile width
-                        map.tileSize * 2		// tile height
+                        c * (map.tileSize), 	// x position of tile on canvas
+                        r * (map.tileSize),	// y position of tile on canvas
+                        map.tileSize,		// tile width
+                        map.tileSize		// tile height
                     );
 
             }
@@ -91,8 +90,8 @@ function drawPlayer() {
         0,
         map.tileSize,
         map.tileSize,
-        player.x,
-        player.y,
+        player.x * map.tileSize,
+        player.y * map.tileSize,
         map.tileSize,
         map.tileSize
     );
@@ -102,36 +101,71 @@ function drawPlayer() {
 // Keyboard listener
 //
 
-var KEY = { W: 87, A: 65, S: 83, D: 68, SPACE: 32, LK: 37, RK: 39, UK: 38, DK: 40};
+var KEY = {W: 87, A: 65, S: 83, D: 68, SPACE: 32, LK: 37, RK: 39, UK: 38, DK: 40};
 
 function keyPressed(e) {
 		switch(e.keyCode) {
 			case KEY.W:
 			case KEY.UK:
-                if (map.getTile(player.x / map.tileSize, player.y / map.tileSize - 1) != 1) {
-                    player.y -= 5;
+                if (moveCheck(1)) {
+                    player.y -= 1;
                 }
-                
 				break;
 			case KEY.A:
 			case KEY.LK:
-                if (map.getTile(player.x / map.tileSize - 1, player.y / map.tileSize) != 1) {
-				    player.x -= 5;
+                if (moveCheck(2)) {
+				    player.x -= 1;
                 }
 				break;
 			case KEY.S:
 			case KEY.DK:
-                if (map.getTile(player.x / map.tileSize, player.y / map.tileSize + 1) != 1) {
-				    player.y += 5;
+                if (moveCheck(3)) {
+				    player.y += 1;
                 }
 				break;
             case KEY.D:
 			case KEY.RK:
-                if (map.getTile(player.x / map.tileSize + 1, player.y / map.tileSize) != 1) {
-				    player.x += 5;
+                if (moveCheck(4)) {
+				    player.x += 1;
                 }
 				break;
             }
 }
 
+
+/* --------------------------------------
+Player
+----------------------------------------*/
+
+var player = {x: 5, y: 5, orientation: 0, tileSize: 32, map: map, backpack: [], hp: 100, money: 0};
+
+/* --------------------------------------
+Movement 
+----------------------------------------*/
+
+var movementTiles = [0, 6, 7, 8, 9, 10, 30, 31, 32];
+
+function moveCheck(input) {
+    var moveTile;
+    switch (input) {
+        case 1:
+            moveTile = map.getTile(player.y - 1, player.x);
+            break;
+        case 2:
+            moveTile = map.getTile(player.y, player.x - 1);
+            break;
+        case 3:
+            moveTile = map.getTile(player.y + 1, player.x);
+            break;
+        case 4:
+            moveTile = map.getTile(player.y, player.x + 1);
+            break;
+    }
+    console.log(moveTile);
+    if (movementTiles.indexOf(moveTile) != -1) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
