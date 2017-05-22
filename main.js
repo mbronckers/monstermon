@@ -192,7 +192,7 @@ function drawPlayer() {
         ctx.drawImage(
             playerImg, // image file source
             0, 
-            player.orientation * player.tileSize,
+            (player.orientation - 1) * player.tileSize,
             player.tileSize,
             player.tileSize,
             player.x * player.tileSize,
@@ -214,24 +214,28 @@ function keyPressed(e) {
 			case KEY.UK:
                 if (moveCheck(1)) {
                     player.y -= 1;
+                    player.orientation = 1;
                 }
 				break;
 			case KEY.A:
 			case KEY.LK:
                 if (moveCheck(2)) {
 				    player.x -= 1;
+				    player.orientation = 4;
                 }
 				break;
 			case KEY.S:
 			case KEY.DK:
                 if (moveCheck(3)) {
 				    player.y += 1;
+				    player.orientation = 3;
                 }
 				break;
             case KEY.D:
 			case KEY.RK:
                 if (moveCheck(4)) {
 				    player.x += 1;
+				    player.orientation = 2;
                 }
 				break;
             }
@@ -242,7 +246,7 @@ function keyPressed(e) {
 Player
 ----------------------------------------*/
 
-var player = {x: 5, y: 5, orientation: 0, tileSize: 32, map: beta, backpack: [], hp: 100, money: 0}
+var player = {x: 5, y: 5, orientation: 1, tileSize: 32, map: beta, backpack: [], hp: 100, money: 0}
 
 /* --------------------------------------
 Movement 
@@ -266,19 +270,19 @@ function moveCheck(input) {
     var moveTile;
     switch (input) {
         case 1:
-            moveTile = map.getTile(player.y - 1, player.x);
+            moveTile = player.map.getTile(player.y - 1, player.x);
             break;
         case 2:
-            moveTile = map.getTile(player.y, player.x - 1);
+            moveTile = player.map.getTile(player.y, player.x - 1);
             break;
         case 3:
-            moveTile = map.getTile(player.y + 1, player.x);
+            moveTile = player.map.getTile(player.y + 1, player.x);
             break;
         case 4:
-            moveTile = map.getTile(player.y, player.x + 1);
+            moveTile = player.map.getTile(player.y, player.x + 1);
             break;
     }
-    
+    console.log(moveTile);
     if (movementTiles.indexOf(moveTile) != -1) {
         return true;
     } else {
