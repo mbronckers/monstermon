@@ -24,7 +24,6 @@ var PokeMart = 64;
 
 var map = {cols: 16, rows: 16, tileSize: 16,
     tiles: [
-<<<<<<< HEAD
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1],
         [1, 2, 2, 2, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
         [1, 3, 3, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -40,23 +39,6 @@ var map = {cols: 16, rows: 16, tileSize: 16,
         [1, 21, 24, 24, 27, 0, 31, 31, 31, 31, 31, 31, 31, 0, 0, 1],
         [1, 22, 25, 20, 28, 0, 31, 31, 31, 31, 31, 31, 31, 31, 0, 1],
         [1, 23, 26, 26, 29, 0, 31, 31, 31, 31, 31, 31, 31, 31, 0, 1],
-=======
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
->>>>>>> CSS
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
     ], 
@@ -86,7 +68,6 @@ var map = {cols: 16, rows: 16, tileSize: 16,
     }
 };
 
-<<<<<<< HEAD
 var beta = {cols: 16, rows: 16, tileSize: 16,
     tiles: [
     	[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -131,8 +112,6 @@ var beta = {cols: 16, rows: 16, tileSize: 16,
     	return this.second[row][col];
     }
 };
-=======
->>>>>>> CSS
 
 window.onload = function() {
     canvas = document.getElementById("game");
@@ -160,7 +139,6 @@ function drawMap() {
                     ctx.drawImage(
                         texture,            // image file source
                         0, // the x coordinate of the image file to clip --> texture file tile's x position
-<<<<<<< HEAD
                         (tile * player.map.tileSize), // the y coordinate of the image file to clip --> texture file tile's y position
                         player.map.tileSize, 		// the width of the clipped image --> texture file tile's width
                         player.map.tileSize,		// the height of the clipped image --> texture file tile's height
@@ -168,15 +146,6 @@ function drawMap() {
                         r * (map.tileSize * 2),	// y position of tile on canvas
                         player.map.tileSize * 2,		// tile width
                         player.map.tileSize * 2		// tile height
-=======
-                        (tile * map.tileSize), // the y coordinate of the image file to clip --> texture file tile's y position
-                        map.tileSize, 		// the width of the clipped image --> texture file tile's width
-                        map.tileSize,		// the height of the clipped image --> texture file tile's height
-                        c * (map.tileSize), 	// x position of tile on canvas
-                        r * (map.tileSize),	// y position of tile on canvas
-                        map.tileSize,		// tile width
-                        map.tileSize		// tile height
->>>>>>> CSS
                     );
             }
         }
@@ -220,7 +189,6 @@ function drawMap() {
 }
 
 function drawPlayer() {
-<<<<<<< HEAD
         ctx.drawImage(
             playerImg, // image file source
             0, 
@@ -232,19 +200,6 @@ function drawPlayer() {
             map.tileSize * 2,
             map.tileSize * 2
             );
-=======
-    ctx.drawImage(
-        playerImg,
-        0,
-        0,
-        map.tileSize,
-        map.tileSize,
-        player.x * map.tileSize,
-        player.y * map.tileSize,
-        map.tileSize,
-        map.tileSize
-    );
->>>>>>> CSS
 }
 
 //
@@ -287,11 +242,7 @@ function keyPressed(e) {
 Player
 ----------------------------------------*/
 
-<<<<<<< HEAD
 var player = {x: 5, y: 5, orientation: 0, tileSize: 32, map: beta, backpack: [], hp: 100, money: 0}
-=======
-var player = {x: 5, y: 5, orientation: 0, tileSize: 32, map: map, backpack: [], hp: 100, money: 0};
->>>>>>> CSS
 
 /* --------------------------------------
 Movement 
@@ -299,7 +250,6 @@ Movement
 
 var movementTiles = [0, 6, 7, 8, 9, 10, 30, 31, 32];
 
-<<<<<<< HEAD
 /* --------------------------------------
 Print functions 
 ----------------------------------------*/
@@ -311,7 +261,7 @@ function print(string) {
     output.appendChild(document.createTextNode(string)); //append child to output paragraph
     text.appendChild(output); //add paragraph to div
 }
-=======
+
 function moveCheck(input) {
     var moveTile;
     switch (input) {
@@ -328,7 +278,7 @@ function moveCheck(input) {
             moveTile = map.getTile(player.y, player.x + 1);
             break;
     }
-    console.log(moveTile);
+    
     if (movementTiles.indexOf(moveTile) != -1) {
         return true;
     } else {
@@ -336,4 +286,4 @@ function moveCheck(input) {
     }
 }
 
->>>>>>> CSS
+
