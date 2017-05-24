@@ -532,7 +532,7 @@ function drawEnemy() {
 
 // random position for enemy
 function changeEnemyLocation() {
-    enemy1.x = getRandomInt(4, 14);
+    enemy1.x = getRandomInt(5, 14);
     enemy1.y = getRandomInt(1, 14);
 }
 
