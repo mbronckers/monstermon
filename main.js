@@ -20,7 +20,7 @@ texture.src = "Graphics/TexturePack.png";
 var playerImg = new Image();
 playerImg.src = "Graphics/user.png"// file path to external texture files
 
-var PokeMart = 64;
+var MonsterMart = 64; // tile number for the MonsterMart, a building on the canvas
 
 var map = {cols: 16, rows: 16, tileSize: 16,
     tiles: [
@@ -60,10 +60,10 @@ var map = {cols: 16, rows: 16, tileSize: 16,
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33, 0],
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ],
-    getTile: function(row, col) {
+    getTile: function(row, col) { 		// returns the tile number from the array based on row and col
         return this.tiles[row][col];
     },
-    getTileSecond: function(row, col) {
+    getTileSecond: function(row, col) {		// returns the tile number from the second layer array based on row and col
     	return this.second[row][col];
     }
 };
@@ -105,10 +105,10 @@ var beta = {cols: 16, rows: 16, tileSize: 16,
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ],
-    getTile: function(row, col) {
+    getTile: function(row, col) {	// returns the tile number from the array based on row and col
         return this.tiles[row][col];
     },
-    getTileSecond: function(row, col) {
+    getTileSecond: function(row, col) { // returns the tile number from the second layer array based on row and col
     	return this.second[row][col];
     }
 };
@@ -157,7 +157,7 @@ function drawMap() {
     	for (var c = 0; c < player.map.cols; c++) {
     		var tile = player.map.getTileSecond(r, c);
 
-    		if (tile == PokeMart) { // special case for building
+    		if (tile == MonsterMart) { // special case for building
     			ctx.drawImage(
     				texture,
     				0,
@@ -239,14 +239,30 @@ function keyPressed(e) {
                 }
 				break;
             }
-}
+}        
 
 
 /* --------------------------------------
 Player
 ----------------------------------------*/
 
-var player = {x: 5, y: 5, orientation: 1, tileSize: 32, map: beta, backpack: [], hp: 100, money: 0}
+var player = {x: 5, y: 5, orientation: 1, tileSize: 32, map: map, monstermon: null, hp: 100, money: 0}
+
+function monsterball() {
+	if (player.map = map && player.monstermon == null && player.x == 14 && player.y == 14 ) {
+	//	print("You have found a MonsterBall. The MonsterBall contains " + monstermon1.name + "!");
+	//	print(monstermon1.name + " is now part of your team.");
+	}
+}
+
+function enemy() {
+	if (player.map = beta && enemy1.health != 0 && player.x == 2 && player.y == 7) {
+	//	print("You have found the final boss of this game!");
+	//	print("You will have to fight him in order to complete the game.");
+	}	
+//	fight();
+
+}
 
 /* --------------------------------------
 Movement 
@@ -268,26 +284,28 @@ function print(string) {
 
 function moveCheck(input) {
     var moveTile;
+
     switch (input) {
-        case 1:
+        case 1: // case of arrow up key
             moveTile = player.map.getTile(player.y - 1, player.x);
             break;
-        case 2:
+        case 2: // case of left arrow key
             moveTile = player.map.getTile(player.y, player.x - 1);
             break;
-        case 3:
+        case 3: // case of arrow down key
             moveTile = player.map.getTile(player.y + 1, player.x);
             break;
-        case 4:
+        case 4: // case of right arrow key
             moveTile = player.map.getTile(player.y, player.x + 1);
             break;
     }
-    console.log(moveTile);
-    if (movementTiles.indexOf(moveTile) != -1) {
+   
+    if (movementTiles.indexOf(moveTile) != -1) { //if the tile player is trying to move to is in the allowed tiles, return true
         return true;
     } else {
         return false;
     }
+
 }
 
 
