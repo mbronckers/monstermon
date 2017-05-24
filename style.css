@@ -1,3 +1,5 @@
+/* Most CSS was used in previous JS project. Comments are only for new code.
+*/
 html {
 	background-color: white;
 	color: black;
@@ -13,21 +15,20 @@ div {
 #encapsulation {
 	width: 80%;
 	margin: auto;
+    overflow: auto;
 }
 
 #canvas {
-	width: 1024px;
-	height: 1024px;
-	margin: auto;
+    width: 512px;
+    height: 512px;
+    margin: auto;
 }
 
-#game {
-	padding: 10px; /* a 10px padding around the HTML canvas for the game */
-}
 
 #textDiv {
-	height: 500px; /* setting the textDiv's height to a fixed 500px */
+	height: 300px; /* setting the textDiv's height to a fixed height, which is needed for the overflow */
 	overflow: auto; /* any content outside the specified dimensions of the div will not overflow the div by creating a scrollbar */
+    text-align: center;
 }
 
 img {
@@ -36,5 +37,5 @@ img {
 }
 
 p {
-	font-size: 14pt;
+	font-size: 14pt; /* sets font size of paragraph text to 14 */
 }
