@@ -20,11 +20,7 @@ texture.src = "Graphics/TexturePack.png";
 var playerImg = new Image();
 playerImg.src = "Graphics/user.png"// file path to external texture files
 
-<<<<<<< HEAD
 var MonsterMart = 64; // tile number for the MonsterMart, a building on the canvas
-=======
-var MonsterMart = 64;
->>>>>>> CSS
 
 var alpha = {cols: 16, rows: 16, tileSize: 16,
     first: [
@@ -64,13 +60,9 @@ var alpha = {cols: 16, rows: 16, tileSize: 16,
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33, 0],
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ],
-<<<<<<< HEAD
+
     getTile: function(row, col) { 		// returns the tile number from the array based on row and col
-        return this.tiles[row][col];
-=======
-    getTile: function(row, col) {
         return this.first[row][col];
->>>>>>> CSS
     },
     getTileSecond: function(row, col) {		// returns the tile number from the second layer array based on row and col
     	return this.second[row][col];
@@ -114,13 +106,8 @@ var beta = {cols: 16, rows: 16, tileSize: 16,
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ],
-<<<<<<< HEAD
     getTile: function(row, col) {	// returns the tile number from the array based on row and col
-        return this.tiles[row][col];
-=======
-    getTile: function(row, col) {
         return this.first[row][col];
->>>>>>> CSS
     },
     getTileSecond: function(row, col) { // returns the tile number from the second layer array based on row and col
     	return this.second[row][col];
@@ -263,37 +250,34 @@ function keyPressed(e) {
 				    player.x += 1;
                 }
             }
-<<<<<<< HEAD
+
 }        
-=======
-        console.log(player.y + " " + player.x);
-}
->>>>>>> CSS
+
 
 
 /* --------------------------------------
 Player
 ----------------------------------------*/
 
-<<<<<<< HEAD
-var player = {x: 5, y: 5, orientation: 1, tileSize: 32, map: map, monstermon: null, hp: 100, money: 0}
+// <<<<<<< HEAD
+// var player = {x: 5, y: 5, orientation: 1, tileSize: 32, map: map, monstermon: null, hp: 100, money: 0}
 
-function monsterball() {
-	if (player.map = map && player.monstermon == null && player.x == 14 && player.y == 14 ) {
-	//	print("You have found a MonsterBall. The MonsterBall contains " + monstermon1.name + "!");
-	//	print(monstermon1.name + " is now part of your team.");
-	}
-}
+// function monsterball() {
+// 	if (player.map = map && player.monstermon == null && player.x == 14 && player.y == 14 ) {
+// 	//	print("You have found a MonsterBall. The MonsterBall contains " + monstermon1.name + "!");
+// 	//	print(monstermon1.name + " is now part of your team.");
+// 	}
+// }
 
-function enemy() {
-	if (player.map = beta && enemy1.health != 0 && player.x == 2 && player.y == 7) {
-	//	print("You have found the final boss of this game!");
-	//	print("You will have to fight him in order to complete the game.");
-	}	
-//	fight();
+// function enemy() {
+// 	if (player.map = beta && enemy1.health != 0 && player.x == 2 && player.y == 7) {
+// 	//	print("You have found the final boss of this game!");
+// 	//	print("You will have to fight him in order to complete the game.");
+// 	}	
+// //	fight();
 
-}
-=======
+// }
+// =======
 var player = {x: 5, y: 5, orientation: 1, tileSize: 32, map: alpha, backpack: [], hp: 100, money: 0};
 
 /* --------------------------------------
@@ -308,7 +292,7 @@ Enemies
 
 var enemy1 = {name: "Enemy1", attack: 10, health: 150};
 
->>>>>>> CSS
+// >>>>>>> CSS
 
 /* --------------------------------------
 Movement 
@@ -331,11 +315,8 @@ function print(string) {
 
 function moveCheck(input) {
     var moveTile;
-<<<<<<< HEAD
-
-=======
     var moveTile2;
->>>>>>> CSS
+
     switch (input) {
         case 1: // case of arrow up key
             moveTile = player.map.getTile(player.y - 1, player.x);
@@ -354,13 +335,8 @@ function moveCheck(input) {
             moveTile2 = player.map.getTileSecond(player.y, player.x + 1);
             break;
     }
-<<<<<<< HEAD
-   
-    if (movementTiles.indexOf(moveTile) != -1) { //if the tile player is trying to move to is in the allowed tiles, return true
-=======
-    console.log(moveTile);
+
     if (movementTiles.indexOf(moveTile) != -1 && movementTiles.indexOf(moveTile2) != -1) {
->>>>>>> CSS
         return true;
     } else {
         return false;
