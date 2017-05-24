@@ -254,7 +254,7 @@ function keyPressed(e) {
 
         checkMonsters();
         checkEnemy();
-
+        checkHealth();
 
 }        
 
@@ -266,10 +266,22 @@ Player
 
 var player = {x: 5, y: 5, orientation: 1, tileSize: 32, map: alpha, hp: 100, money: 0};
 
-
+function checkHealth() {
+    if (player.health <= 0) {
+        //respawn
+        player.map = alpha;
+        player.orientation = 1;
+        player.x = 9;
+        player.y = 3;
+        monstermon1Obtained = false;
+        health = 100;
+        print("You have respawned. You can try again.");
+    }
+}
 /* --------------------------------------
 Monsters
 ----------------------------------------*/
+
 var monstermon1Obtained = false; // boolean for having monstermon in backpack
 var monstermon1 = {name: "Woeshoem", attack: 7, health: 100};
 
@@ -284,11 +296,12 @@ function checkMonsters() {
         }
     }
 }
+
 /* --------------------------------------
 Enemies
 ----------------------------------------*/
 
-var enemy1 = {name: "Enemy1", attack: 10, health: 150};
+var enemy1 = {name: "end boss", attack: 10, health: 150};
 
 function checkEnemy() {
     if (player.map == beta && enemy1.health != 0 && player.x == 3 && player.y == 7 && player.orientation == 4) {
@@ -314,7 +327,6 @@ function print(string) {
     output.appendChild(document.createTextNode(string)); //append child to output paragraph
     text.appendChild(output); //add paragraph to div
 }
-
 
 function moveCheck(input) {
     var moveTile;
