@@ -132,21 +132,12 @@ window.onload = function() {
 // drawMap() function: ctx.drawImage(img,sx,sy,swidth,sheight,x,y,width,height); is used to take a specified part of an image
 var monsterBallShow = true; // true if monsterball is able to be collected
 function drawMap() {
-<<<<<<< HEAD
-=======
-
-    var monsterBallShow = true; // true if monsterball is able to be collected
-
->>>>>>> player
     if (monsterBallShow) {
         player.map.second[14][14] = 33; 
     } else {
         player.map.second[14][14] = 0;
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> player
     for (var r = 0; r < player.map.rows; r++) {
         for (var c = 0; c < player.map.cols; c++) {
             var tile = player.map.getTile(r, c);
@@ -279,18 +270,18 @@ function keyPressed(e) {
 Player
 ----------------------------------------*/
 
-var player = {x: 5, y: 5, orientation: 1, tileSize: 32, map: alpha, hp: 100, money: 0};
+var player = {x: 5, y: 5, orientation: 3, tileSize: 32, map: alpha, hp: 100, money: 0};
 
 function checkHealth() {
-    if (player.health <= 0) {
+    if (player.hp <= 0) {
         //respawn
         player.map = alpha;
-        player.orientation = 1;
+        player.orientation = 3;
         player.x = 9;
         player.y = 3;
         monstermon1Obtained = false;
         monsterBallShow = true;
-        health = 100;
+        player.hp = 100;
         print("You have respawned. You can try again.");
     }
 }
@@ -303,21 +294,13 @@ var monstermon1 = {name: "Woeshoem", attack: 7, health: 100};
 
 function checkMonsters() {
     if (player.map == alpha) {
-<<<<<<< HEAD
         if (player.x == 14 && player.y == 14 && monsterBallShow) {
             if (!monstermon1Obtained) {
               print("You have found a MonsterBall. The MonsterBall contains " + monstermon1.name + "!");
               print(monstermon1.name + " is now part of your team.");
               monstermon1Obtained = true;  
               monsterBallShow = false;
-=======
-       if (player.x == 14 && player.y == 14 && monsterBallShow) {}
-            if (!monstermon1Obtained) {
-              print("You have found a MonsterBall. The MonsterBall contains " + monstermon1.name + "!");
-              print(monstermon1.name + " is now part of your team.");
-              monstermon1Obtained = true;
-              monsterBallShow = false;    
->>>>>>> player
+
             }
         }
     }
@@ -333,6 +316,7 @@ function checkEnemy() {
     if (player.map == beta && enemy1.health != 0 && player.x == 3 && player.y == 7 && player.orientation == 4) {
         print("You have found the final boss of this game!");
         print("You will have to fight him in order to complete the game.");
+        player.hp = 0;
     }   
 // fight();
 }
