@@ -253,9 +253,11 @@ function keyPressed(e) {
             }
 
         checkMonsters();
+        checkEnemy();
 
 
 }        
+
 
 
 /* --------------------------------------
@@ -263,6 +265,7 @@ Player
 ----------------------------------------*/
 
 var player = {x: 5, y: 5, orientation: 1, tileSize: 32, map: alpha, hp: 100, money: 0};
+
 
 /* --------------------------------------
 Monsters
@@ -288,9 +291,9 @@ Enemies
 var enemy1 = {name: "Enemy1", attack: 10, health: 150};
 
 function checkEnemy() {
-    if (player.map == beta && enemy1.health != 0 && player.x == 2 && player.y == 7) {
-    print("You have found the final boss of this game!");
-    print("You will have to fight him in order to complete the game.");
+    if (player.map == beta && enemy1.health != 0 && player.x == 3 && player.y == 7 && player.orientation == 4) {
+        print("You have found the final boss of this game!");
+        print("You will have to fight him in order to complete the game.");
     }   
 // fight();
 }
