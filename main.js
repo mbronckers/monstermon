@@ -252,50 +252,48 @@ function keyPressed(e) {
                 break;
             }
 
-// START ISSUE
-        monsterball();
-        enemy();
-// END ISSUE
+        checkMonsters();
 
 
 }        
-
 
 
 /* --------------------------------------
 Player
 ----------------------------------------*/
 
-function monsterball() {
-	if (player.map = alpha && player.monstermon == null && player.x == 14 && player.y == 14) {
-	//	print("You have found a MonsterBall. The MonsterBall contains " + monstermon1.name + "!");
-	//	print(monstermon1.name + " is now part of your team.");
-	}
-}
-
-function enemy() {
-	if (player.map = beta && enemy1.health != 0 && player.x == 2 && player.y == 7) {
-	//	print("You have found the final boss of this game!");
-	//	print("You will have to fight him in order to complete the game.");
-	}	
-//	fight();
-
-}
-
-var player = {x: 5, y: 5, orientation: 1, tileSize: 32, map: alpha, monstermon: null, hp: 100, money: 0};
+var player = {x: 5, y: 5, orientation: 1, tileSize: 32, map: alpha, hp: 100, money: 0};
 
 /* --------------------------------------
 Monsters
 ----------------------------------------*/
-
+var monstermon1Obtained = false; // boolean for having monstermon in backpack
 var monstermon1 = {name: "Woeshoem", attack: 7, health: 100};
 
+function checkMonsters() {
+    if (player.map == alpha) {
+        if (player.x == 14 && player.y == 14) {
+            if (!monstermon1Obtained) {
+              print("You have found a MonsterBall. The MonsterBall contains " + monstermon1.name + "!");
+              print(monstermon1.name + " is now part of your team.");
+              monstermon1Obtained = true;    
+            }
+        }
+    }
+}
 /* --------------------------------------
 Enemies
 ----------------------------------------*/
 
 var enemy1 = {name: "Enemy1", attack: 10, health: 150};
 
+function checkEnemy() {
+    if (player.map == beta && enemy1.health != 0 && player.x == 2 && player.y == 7) {
+    print("You have found the final boss of this game!");
+    print("You will have to fight him in order to complete the game.");
+    }   
+// fight();
+}
 /* --------------------------------------
 Movement 
 ----------------------------------------*/
