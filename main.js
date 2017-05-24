@@ -280,7 +280,7 @@ function checkHealth() {
     if (player.hp <= 0) {
         //respawn
         player.map = alpha;
-        player.orientation = 1;
+        player.orientation = 3;
         player.x = 9;
         player.y = 3;
         monstermon1Obtained = false;
