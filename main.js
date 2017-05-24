@@ -314,7 +314,7 @@ var enemy1 = {name: "Enemy1", attack: 10, health: 150};
 Movement 
 ----------------------------------------*/
 
-var movementTiles = [0, 6, 7, 8, 9, 10, 30, 31, 32];
+var movementTiles = [0, 6, 7, 8, 9, 10, 30, 31, 32, 33];
 
 /* --------------------------------------
 Print functions 
