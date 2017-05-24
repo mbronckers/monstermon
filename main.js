@@ -132,6 +132,15 @@ window.onload = function() {
 // drawMap() function: ctx.drawImage(img,sx,sy,swidth,sheight,x,y,width,height); is used to take a specified part of an image
 
 function drawMap() {
+
+    var monsterBallShow = true; // true if monsterball is able to be collected
+
+    if (monsterBallShow) {
+        player.map.second[14][14] = 33; 
+    } else {
+        player.map.second[14][14] = 0;
+    }
+
     for (var r = 0; r < player.map.rows; r++) {
         for (var c = 0; c < player.map.cols; c++) {
             var tile = player.map.getTile(r, c);
@@ -274,6 +283,7 @@ function checkHealth() {
         player.x = 9;
         player.y = 3;
         monstermon1Obtained = false;
+        monsterBallShow = true;
         health = 100;
         print("You have respawned. You can try again.");
     }
@@ -287,11 +297,12 @@ var monstermon1 = {name: "Woeshoem", attack: 7, health: 100};
 
 function checkMonsters() {
     if (player.map == alpha) {
-        if (player.x == 14 && player.y == 14) {
+       if (player.x == 14 && player.y == 14 && monsterBallShow) {}
             if (!monstermon1Obtained) {
               print("You have found a MonsterBall. The MonsterBall contains " + monstermon1.name + "!");
               print(monstermon1.name + " is now part of your team.");
-              monstermon1Obtained = true;    
+              monstermon1Obtained = true;
+              monsterBallShow = false;    
             }
         }
     }
