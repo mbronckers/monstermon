@@ -268,8 +268,6 @@ function keyPressed(e) {
 
 }        
 
-
-
 /* --------------------------------------
 Player
 ----------------------------------------*/
@@ -287,6 +285,12 @@ function checkHealth() {
         monsterBallShow = true;
         health = 100;
         print("You have respawned. You can try again.");
+    }
+
+    if (player.map == alpha) {
+        if (player.x == 9 && player.y == 3 & player.orientation == 1) {
+            print("This is the MonsterMart. It is a health center for aspiring monster hunters like yourself. However, do not be mistaken: this is not a place where you want to be.");
+        }
     }
 }
 /* --------------------------------------
@@ -370,6 +374,8 @@ function print(string) {
 
     output.appendChild(document.createTextNode(string)); //append child to output paragraph
     text.appendChild(output); //add paragraph to div
+
+    document.getElementById("textDiv").scrollTop = document.getElementById("textDiv").scrollHeight; // ensures the new input/output is at the bottom of the div
 }
 
 
