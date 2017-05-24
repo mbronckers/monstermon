@@ -249,7 +249,14 @@ function keyPressed(e) {
                 if (moveCheck(4)) {
 				    player.x += 1;
                 }
+                break;
             }
+
+// START ISSUE
+        monsterball();
+        enemy();
+// END ISSUE
+
 
 }        
 
@@ -259,26 +266,23 @@ function keyPressed(e) {
 Player
 ----------------------------------------*/
 
-// <<<<<<< HEAD
-// var player = {x: 5, y: 5, orientation: 1, tileSize: 32, map: map, monstermon: null, hp: 100, money: 0}
+function monsterball() {
+	if (player.map = alpha && player.monstermon == null && player.x == 14 && player.y == 14) {
+	//	print("You have found a MonsterBall. The MonsterBall contains " + monstermon1.name + "!");
+	//	print(monstermon1.name + " is now part of your team.");
+	}
+}
 
-// function monsterball() {
-// 	if (player.map = map && player.monstermon == null && player.x == 14 && player.y == 14 ) {
-// 	//	print("You have found a MonsterBall. The MonsterBall contains " + monstermon1.name + "!");
-// 	//	print(monstermon1.name + " is now part of your team.");
-// 	}
-// }
+function enemy() {
+	if (player.map = beta && enemy1.health != 0 && player.x == 2 && player.y == 7) {
+	//	print("You have found the final boss of this game!");
+	//	print("You will have to fight him in order to complete the game.");
+	}	
+//	fight();
 
-// function enemy() {
-// 	if (player.map = beta && enemy1.health != 0 && player.x == 2 && player.y == 7) {
-// 	//	print("You have found the final boss of this game!");
-// 	//	print("You will have to fight him in order to complete the game.");
-// 	}	
-// //	fight();
+}
 
-// }
-// =======
-var player = {x: 5, y: 5, orientation: 1, tileSize: 32, map: alpha, backpack: [], hp: 100, money: 0};
+var player = {x: 5, y: 5, orientation: 1, tileSize: 32, map: alpha, monstermon: null, hp: 100, money: 0};
 
 /* --------------------------------------
 Monsters
@@ -291,8 +295,6 @@ Enemies
 ----------------------------------------*/
 
 var enemy1 = {name: "Enemy1", attack: 10, health: 150};
-
-// >>>>>>> CSS
 
 /* --------------------------------------
 Movement 
