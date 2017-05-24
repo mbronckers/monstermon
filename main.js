@@ -20,7 +20,7 @@ texture.src = "Graphics/TexturePack.png";
 var playerImg = new Image();
 playerImg.src = "Graphics/user.png"// file path to external texture files
 
-var MonsterMart = 64;
+var MonsterMart = 64; // tile number for the MonsterMart, a building on the canvas
 
 var alpha = {cols: 16, rows: 16, tileSize: 16,
     first: [
@@ -60,10 +60,11 @@ var alpha = {cols: 16, rows: 16, tileSize: 16,
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33, 0],
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ],
-    getTile: function(row, col) {
+
+    getTile: function(row, col) { 		// returns the tile number from the array based on row and col
         return this.first[row][col];
     },
-    getTileSecond: function(row, col) {
+    getTileSecond: function(row, col) {		// returns the tile number from the second layer array based on row and col
     	return this.second[row][col];
     }
 };
@@ -105,10 +106,10 @@ var beta = {cols: 16, rows: 16, tileSize: 16,
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ],
-    getTile: function(row, col) {
+    getTile: function(row, col) {	// returns the tile number from the array based on row and col
         return this.first[row][col];
     },
-    getTileSecond: function(row, col) {
+    getTileSecond: function(row, col) { // returns the tile number from the second layer array based on row and col
     	return this.second[row][col];
     }
 };
@@ -248,30 +249,54 @@ function keyPressed(e) {
                 if (moveCheck(4)) {
 				    player.x += 1;
                 }
+                break;
             }
-        console.log(player.y + " " + player.x);
-}
+
+        checkMonsters();
+        checkEnemy();
+
+
+}        
+
 
 
 /* --------------------------------------
 Player
 ----------------------------------------*/
 
-var player = {x: 5, y: 5, orientation: 1, tileSize: 32, map: alpha, backpack: [], hp: 100, money: 0};
+var player = {x: 5, y: 5, orientation: 1, tileSize: 32, map: alpha, hp: 100, money: 0};
+
 
 /* --------------------------------------
 Monsters
 ----------------------------------------*/
-
+var monstermon1Obtained = false; // boolean for having monstermon in backpack
 var monstermon1 = {name: "Woeshoem", attack: 7, health: 100};
 
+function checkMonsters() {
+    if (player.map == alpha) {
+        if (player.x == 14 && player.y == 14) {
+            if (!monstermon1Obtained) {
+              print("You have found a MonsterBall. The MonsterBall contains " + monstermon1.name + "!");
+              print(monstermon1.name + " is now part of your team.");
+              monstermon1Obtained = true;    
+            }
+        }
+    }
+}
 /* --------------------------------------
 Enemies
 ----------------------------------------*/
 
 var enemy1 = {name: "Enemy1", attack: 10, health: 150};
 
-
+function checkEnemy() {
+    if (player.map == beta && enemy1.health != 0 && player.x == 3 && player.y == 7 && player.orientation == 4) {
+        print("You have found the final boss of this game!");
+        print("You will have to fight him in order to complete the game.");
+    }   
+// fight();
+}
 /* --------------------------------------
 Movement 
 ----------------------------------------*/
@@ -294,30 +319,32 @@ function print(string) {
 function moveCheck(input) {
     var moveTile;
     var moveTile2;
+
     switch (input) {
-        case 1:
+        case 1: // case of arrow up key
             moveTile = player.map.getTile(player.y - 1, player.x);
             moveTile2 = player.map.getTileSecond(player.y - 1, player.x);
             break;
-        case 2:
+        case 2: // case of left arrow key
             moveTile = player.map.getTile(player.y, player.x - 1);
             moveTile2 = player.map.getTileSecond(player.y, player.x - 1);
             break;
-        case 3:
+        case 3: // case of arrow down key
             moveTile = player.map.getTile(player.y + 1, player.x);
             moveTile2 = player.map.getTileSecond(player.y + 1, player.x);
             break;
-        case 4:
+        case 4: // case of right arrow key
             moveTile = player.map.getTile(player.y, player.x + 1);
             moveTile2 = player.map.getTileSecond(player.y, player.x + 1);
             break;
     }
-    console.log(moveTile);
+
     if (movementTiles.indexOf(moveTile) != -1 && movementTiles.indexOf(moveTile2) != -1) {
         return true;
     } else {
         return false;
     }
+
 }
 
 
