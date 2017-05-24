@@ -24,3 +24,17 @@ div {
 #game {
 	padding: 10px; /* a 10px padding around the HTML canvas for the game */
 }
+
+#textDiv {
+	height: 500px; /* setting the textDiv's height to a fixed 500px */
+	overflow: auto; /* any content outside the specified dimensions of the div will not overflow the div by creating a scrollbar */
+}
+
+img {
+	padding: 10px;
+	float: center; /* float the image to the center of the textDiv */
+}
+
+p {
+	font-size: 14pt;
+}

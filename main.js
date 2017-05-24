@@ -10,6 +10,11 @@ File path help: https://www.w3schools.com/html/html_filepaths.asp
 ____________________________________________________________________
 */
 
+
+/* --------------------------------------
+Graphic variables
+----------------------------------------*/
+
 var texture = new Image();
 texture.src = "Graphics/TexturePack.png"; 
 var playerImg = new Image();
@@ -40,13 +45,15 @@ var map = {cols: 16, rows: 16, tileSize: 16,
     }
 };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 window.onload = function() {
     canvas = document.getElementById("game");
     ctx = canvas.getContext("2d");
     
-    
-    
+
     setInterval(function() {
         canvas.width = canvas.width;
         drawMap();
@@ -57,15 +64,15 @@ window.onload = function() {
     document.addEventListener('keydown', keyPressed);
 }
 
-/* drawMap() function:
-    ctx.drawImage(img,sx,sy,swidth,sheight,x,y,width,height); is used to take a specified part of an image
-*/
+// drawMap() function: ctx.drawImage(img,sx,sy,swidth,sheight,x,y,width,height); is used to take a specified part of an image
+
 function drawMap() {
     for (var r = 0; r < map.rows; r++) {
         for (var c = 0; c < map.cols; c++) {
             var tile = map.getTile(r, c);
             
             if (tile != -1) { // a value of -1 in the map array means empty tile
+
                     ctx.drawImage(
                         texture,            // image file source
                         0, // the x coordinate of the image file to clip --> texture file tile's x position
@@ -77,13 +84,13 @@ function drawMap() {
                         map.tileSize,		// tile width
                         map.tileSize		// tile height
                     );
-
             }
         }
     }
 }
 
 function drawPlayer() {
+<<<<<<< HEAD
     ctx.drawImage(
         playerImg,
         0,
@@ -95,6 +102,19 @@ function drawPlayer() {
         map.tileSize,
         map.tileSize
     );
+=======
+        ctx.drawImage(
+            playerImg, // image file source
+            0, 
+            player.orientation * player.tileSize,
+            player.tileSize,
+            player.tileSize,
+            player.x * player.tileSize,
+            player.y * player.tileSize,
+            map.tileSize * 2,
+            map.tileSize * 2
+            );
+>>>>>>> master
 }
 
 //
@@ -107,6 +127,7 @@ function keyPressed(e) {
 		switch(e.keyCode) {
 			case KEY.W:
 			case KEY.UK:
+<<<<<<< HEAD
                 if (moveCheck(1)) {
                     player.y -= 1;
                 }
@@ -128,6 +149,21 @@ function keyPressed(e) {
                 if (moveCheck(4)) {
 				    player.x += 1;
                 }
+=======
+                player.y -= 1;
+				break;
+			case KEY.A:
+			case KEY.LK:
+				player.x -= 1;
+				break;
+			case KEY.S:
+			case KEY.DK:
+				player.y += 1;
+				break;
+            case KEY.D:
+			case KEY.RK:
+				player.x += 1;
+>>>>>>> master
 				break;
             }
 }
@@ -137,7 +173,11 @@ function keyPressed(e) {
 Player
 ----------------------------------------*/
 
+<<<<<<< HEAD
 var player = {x: 5, y: 5, orientation: 0, tileSize: 32, map: alpha1, backpack: [], hp: 100, money: 0};
+=======
+var player = {x: 5, y: 5, orientation: 0, tileSize: 32, map: map, backpack: [], hp: 100, money: 0}
+>>>>>>> master
 
 /* --------------------------------------
 Movement 
@@ -145,6 +185,7 @@ Movement
 
 var movementTiles = [0, 6, 7, 8, 9, 10, 30, 31, 32];
 
+<<<<<<< HEAD
 function moveCheck(input) {
     var moveTile;
     switch (input) {
@@ -170,3 +211,16 @@ function moveCheck(input) {
     }
 }
 
+=======
+/* --------------------------------------
+Print functions 
+----------------------------------------*/
+
+function print(string) {
+    var output = document.createElement("p"); //create a paragrahp element to hold the computer's response to input
+    var text = document.getElementById("textDiv"); //get div element for the entered text by user
+
+    output.appendChild(document.createTextNode(string)); //append child to output paragraph
+    text.appendChild(output); //add paragraph to div
+}
+>>>>>>> master
