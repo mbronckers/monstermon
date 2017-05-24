@@ -28,6 +28,7 @@ div {
 #textDiv {
 	height: 500px; /* setting the textDiv's height to a fixed 500px */
 	overflow: auto; /* any content outside the specified dimensions of the div will not overflow the div by creating a scrollbar */
+    text-align: center;
 }
 
 img {
