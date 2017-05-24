@@ -20,7 +20,7 @@ texture.src = "Graphics/TexturePack.png";
 var playerImg = new Image();
 playerImg.src = "Graphics/user.png"// file path to external texture files
 
-var PokeMart = 64;
+var MonsterMart = 64;
 
 var alpha = {cols: 16, rows: 16, tileSize: 16,
     first: [
@@ -156,7 +156,7 @@ function drawMap() {
     	for (var c = 0; c < player.map.cols; c++) {
     		var tile = player.map.getTileSecond(r, c);
 
-    		if (tile == PokeMart) { // special case for building
+    		if (tile == MonsterMart) { // special case for building
     			ctx.drawImage(
     				texture,
     				0,
@@ -257,7 +257,19 @@ function keyPressed(e) {
 Player
 ----------------------------------------*/
 
-var player = {x: 5, y: 5, orientation: 1, tileSize: 32, map: alpha, backpack: [], hp: 100, money: 0}
+var player = {x: 5, y: 5, orientation: 1, tileSize: 32, map: alpha, backpack: [], hp: 100, money: 0};
+
+/* --------------------------------------
+Monsters
+----------------------------------------*/
+
+var monstermon1 = {name: "Woeshoem", attack: 7, health: 100};
+
+/* --------------------------------------
+Enemies
+----------------------------------------*/
+
+var enemy1 = {name: "Enemy1", attack: 10, health: 150};
 
 
 /* --------------------------------------
