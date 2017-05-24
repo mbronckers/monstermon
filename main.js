@@ -514,6 +514,7 @@ function beginFight() {
         }, 1000/30);   
 }
 
+
 //draws enemy at designated location
 function drawEnemy() {
     ctx.drawImage(
@@ -547,8 +548,8 @@ mousePos = {x: 0, y: 0};
 function mouseClickedPosition(event) {
     if (fightBegin) {
         var canvas = document.getElementById("canvas");
-        mousePos.x = (event.clientX - (canvas.offsetLeft - canvas.scrollLeft)) - 2;
-        mousePos.y = (event.clientY - (canvas.offsetTop - canvas.scrollTop)) - 2;
+        mousePos.x = event.clientX - canvas.offsetLeft - canvas.scrollLeft;
+        mousePos.y = event.clientY - canvas.offsetTop - canvas.scrollTop;
         
     }
     
