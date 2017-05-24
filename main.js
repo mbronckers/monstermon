@@ -16,12 +16,13 @@ Graphic variables
 ----------------------------------------*/
 
 var texture = new Image();
-texture.src = "Graphics/TexturePack.png"; 
+texture.src = "Graphics/TexturePack.png"; // file path to external texture file
 var playerImg = new Image();
-playerImg.src = "Graphics/user.png"// file path to external texture files
+playerImg.src = "Graphics/user.png"// file path to external player graphics file
 
 var MonsterMart = 64; // tile number for the MonsterMart, a building on the canvas
 
+// alpha is the initial main map for the player
 var alpha = {cols: 16, rows: 16, tileSize: 16,
     first: [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1],
@@ -69,8 +70,9 @@ var alpha = {cols: 16, rows: 16, tileSize: 16,
     }
 };
 
+// beta is the second map when you go left from alpha
 var beta = {cols: 16, rows: 16, tileSize: 16,
-    first: [
+    first: [ // first layer for background
     	[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     	[1, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     	[1, 2, 2, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -88,7 +90,7 @@ var beta = {cols: 16, rows: 16, tileSize: 16,
     	[1, 31, 31, 31, 31, 31, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
     	[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     ], 
-    second: [
+    second: [ // second layer for additional items to be displayed on top of background
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -119,7 +121,6 @@ window.onload = function() {
     canvas = document.getElementById("game");
     ctx = canvas.getContext("2d");
     
-
     setInterval(function() {
         canvas.width = canvas.width;
         drawMap();
@@ -132,6 +133,12 @@ window.onload = function() {
 // drawMap() function: ctx.drawImage(img,sx,sy,swidth,sheight,x,y,width,height); is used to take a specified part of an image
 var monsterBallShow = true; // true if monsterball is able to be collected
 function drawMap() {
+<<<<<<< HEAD
+=======
+
+    
+
+>>>>>>> player
     if (monsterBallShow) {
         player.map.second[14][14] = 33; 
     } else {
@@ -198,7 +205,7 @@ function drawPlayer() {
         ctx.drawImage(
             playerImg, // image file source
             0, 
-            (player.orientation - 1) * player.tileSize,
+            (player.orientation - 1) * player.tileSize, // function uses the same properties as in drawMap()
             player.tileSize,
             player.tileSize,
             player.x * player.tileSize,
@@ -226,7 +233,7 @@ function keyPressed(e) {
 			case KEY.A:
 			case KEY.LK:
                 player.orientation = 4;
-                if (player.map == alpha && player.x == 0 && (player.y == 10 || player.y == 11)) {
+                if (player.map == alpha && player.x == 0 && (player.y == 10 || player.y == 11)) { // movement to left map
                     player.map = beta;
                     player.x = 15;
                     player.y = 5;
@@ -246,7 +253,7 @@ function keyPressed(e) {
             case KEY.D:
 			case KEY.RK:
                 player.orientation = 2;
-                if (player.map == beta && player.x == 15 && player.y == 5) {
+                if (player.map == beta && player.x == 15 && player.y == 5) { // movement to right map
                     player.map = alpha;
                     player.x = 0;
                     player.y = 10;
@@ -263,8 +270,6 @@ function keyPressed(e) {
         checkHealth();
 
 }        
-
-
 
 /* --------------------------------------
 Player
@@ -284,6 +289,12 @@ function checkHealth() {
         player.hp = 100;
         print("You have respawned. You can try again.");
     }
+
+    if (player.map == alpha) {
+        if (player.x == 9 && player.y == 3 & player.orientation == 1) {
+            print("This is the MonsterMart. It is a health center for aspiring monster hunters like yourself. However, do not be mistaken: this is not a place where you want to be.");
+        }
+    }
 }
 /* --------------------------------------
 Monsters
@@ -291,11 +302,17 @@ Monsters
 
 var monstermon1Obtained = false; // boolean for having monstermon in backpack
 var monstermon1 = {name: "Woeshoem", attack: 7, health: 100};
+var monsterBallShow = true ; // true if monsterball is able to be collected
 
 function checkMonsters() {
     if (player.map == alpha) {
+<<<<<<< HEAD
         if (player.x == 14 && player.y == 14 && monsterBallShow) {
             if (!monstermon1Obtained) {
+=======
+       if (player.x == 14 && player.y == 14 && monsterBallShow) {
+        if (!monstermon1Obtained) {
+>>>>>>> player
               print("You have found a MonsterBall. The MonsterBall contains " + monstermon1.name + "!");
               print(monstermon1.name + " is now part of your team.");
               monstermon1Obtained = true;  
@@ -325,18 +342,6 @@ Movement
 ----------------------------------------*/
 
 var movementTiles = [0, 6, 7, 8, 9, 10, 30, 31, 32, 33];
-
-/* --------------------------------------
-Print functions 
-----------------------------------------*/
-
-function print(string) {
-    var output = document.createElement("p"); //create a paragrahp element to hold the computer's response to input
-    var text = document.getElementById("textDiv"); //get div element for the entered text by user
-
-    output.appendChild(document.createTextNode(string)); //append child to output paragraph
-    text.appendChild(output); //add paragraph to div
-}
 
 function moveCheck(input) {
     var moveTile;
@@ -368,5 +373,21 @@ function moveCheck(input) {
     }
 
 }
+
+/* --------------------------------------
+Print function 
+----------------------------------------*/
+
+function print(string) {
+    var output = document.createElement("p"); //create a paragrahp element to hold the computer's response to input
+    var text = document.getElementById("textDiv"); //get div element for the entered text by user
+
+    output.appendChild(document.createTextNode(string)); //append child to output paragraph
+    text.appendChild(output); //add paragraph to div
+
+    document.getElementById("textDiv").scrollTop = document.getElementById("textDiv").scrollHeight; // ensures the new input/output is at the bottom of the div
+}
+
+
 
 
