@@ -22,7 +22,7 @@ playerImg.src = "Graphics/user.png"; // file path to external player graphics fi
 var enemyImg = new Image();
 enemyImg.src = "Graphics/enemy.png";
 var fightImg = new Image();
-fightImg = "Graphics/fight.png"; // file path to external battle graphics file
+fightImg.src = "Graphics/fight.png"; // file path to external battle graphics file
 
 
 var MonsterMart = 64; // tile number for the MonsterMart, a building on the canvas
@@ -168,6 +168,7 @@ var gamma = {cols: 16, rows: 16, tileSize: 16,
     }
 };
 
+//following is called when the window loads
 window.onload = function() {
     canvas = document.getElementById("game");
     ctx = canvas.getContext("2d");
@@ -184,7 +185,7 @@ window.onload = function() {
             checkBossHealth();
         }
         checkHealth();
-    }, 1000/30);
+    }, 1000/30); // function above runs on 30 fps
     
     document.addEventListener('keydown', keyPressed);
     canvas.addEventListener("mousedown", mouseClickedPosition, false);
@@ -279,11 +280,11 @@ function drawPlayer() {
 // Keyboard listener
 //
 
-var KEY = {W: 87, A: 65, S: 83, D: 68, SPACE: 32, LK: 37, RK: 39, UK: 38, DK: 40};
+var KEY = {W: 87, A: 65, S: 83, D: 68, SPACE: 32, LK: 37, RK: 39, UK: 38, DK: 40}; // an array of keycodes
 
 function keyPressed(e) {
     if (!fightActive) {
-		switch(e.keyCode) {
+		switch(e.keyCode) {       // cases for when different keys are his
 			case KEY.W:
 			case KEY.UK:
                 player.orientation = 1;
@@ -525,7 +526,7 @@ function drawEnemy() {
     ctx.drawImage(
         fightImg, // image file source
         0, 
-        2 * player.tileSize, // function uses the same properties as in drawMap()
+        0, // function uses the same properties as in drawMap()
         player.tileSize,
         player.tileSize,
         enemy1.x * player.tileSize,
@@ -573,7 +574,7 @@ function drawMonsterMon() {
     ctx.drawImage(
         fightImg, // image file source
         0, 
-        3 * player.tileSize, // function uses the same properties as in drawMap()
+        1 * player.tileSize, // function uses the same properties as in drawMap()
         player.tileSize,
         player.tileSize,
         4 * player.tileSize,
