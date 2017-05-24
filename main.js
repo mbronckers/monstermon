@@ -134,7 +134,7 @@ window.onload = function() {
 
 function drawMap() {
 
-    var monsterBallShow = true; // true if monsterball is able to be collected
+    
 
     if (monsterBallShow) {
         player.map.second[14][14] = 33; 
@@ -277,7 +277,7 @@ Player
 var player = {x: 5, y: 5, orientation: 1, tileSize: 32, map: alpha, hp: 100, money: 0};
 
 function checkHealth() {
-    if (player.health <= 0) {
+    if (player.hp <= 0) {
         //respawn
         player.map = alpha;
         player.orientation = 1;
@@ -295,11 +295,12 @@ Monsters
 
 var monstermon1Obtained = false; // boolean for having monstermon in backpack
 var monstermon1 = {name: "Woeshoem", attack: 7, health: 100};
+var monsterBallShow = true ; // true if monsterball is able to be collected
 
 function checkMonsters() {
     if (player.map == alpha) {
-       if (player.x == 14 && player.y == 14 && monsterBallShow) {}
-            if (!monstermon1Obtained) {
+       if (player.x == 14 && player.y == 14 && monsterBallShow) {
+        if (!monstermon1Obtained) {
               print("You have found a MonsterBall. The MonsterBall contains " + monstermon1.name + "!");
               print(monstermon1.name + " is now part of your team.");
               monstermon1Obtained = true;
@@ -327,18 +328,6 @@ Movement
 ----------------------------------------*/
 
 var movementTiles = [0, 6, 7, 8, 9, 10, 30, 31, 32, 33];
-
-/* --------------------------------------
-Print functions 
-----------------------------------------*/
-
-function print(string) {
-    var output = document.createElement("p"); //create a paragrahp element to hold the computer's response to input
-    var text = document.getElementById("textDiv"); //get div element for the entered text by user
-
-    output.appendChild(document.createTextNode(string)); //append child to output paragraph
-    text.appendChild(output); //add paragraph to div
-}
 
 function moveCheck(input) {
     var moveTile;
@@ -370,5 +359,19 @@ function moveCheck(input) {
     }
 
 }
+
+/* --------------------------------------
+Print function 
+----------------------------------------*/
+
+function print(string) {
+    var output = document.createElement("p"); //create a paragrahp element to hold the computer's response to input
+    var text = document.getElementById("textDiv"); //get div element for the entered text by user
+
+    output.appendChild(document.createTextNode(string)); //append child to output paragraph
+    text.appendChild(output); //add paragraph to div
+}
+
+
 
 
