@@ -18,11 +18,15 @@ Graphic variables
 var texture = new Image();
 texture.src = "Graphics/TexturePack.png"; // file path to external texture file
 var playerImg = new Image();
-playerImg.src = "Graphics/user.png";// file path to external player graphics file
+playerImg.src = "Graphics/user.png"; // file path to external player graphics file
 var enemyImg = new Image();
 enemyImg.src = "Graphics/enemy.png";
+var fightImg = new Image();
+fightImg = "Graphics/fight.png"; // file path to external battle graphics file
+
 
 var MonsterMart = 64; // tile number for the MonsterMart, a building on the canvas
+
 
 // alpha is the initial main map for the player
 var alpha = {cols: 16, rows: 16, tileSize: 16,
@@ -248,7 +252,8 @@ function drawMap() {
     		} 
     	}
     }
-    
+
+    // text box to show health during battle
     if (fightActive) {
         ctx.fillStyle = "black";
         ctx.fillText("MonsterMon Health: " + monstermon1.health, 80, 40);
@@ -509,7 +514,7 @@ function beginFight() {
                 clearInterval(interval1);
                 clearInterval(interval2);
                 beginFight();
-               
+
             } 
         }, 1000/30);   
 }
@@ -518,9 +523,9 @@ function beginFight() {
 //draws enemy at designated location
 function drawEnemy() {
     ctx.drawImage(
-        playerImg, // image file source
+        fightImg, // image file source
         0, 
-        96, // function uses the same properties as in drawMap()
+        2 * player.tileSize, // function uses the same properties as in drawMap()
         player.tileSize,
         player.tileSize,
         enemy1.x * player.tileSize,
@@ -566,9 +571,9 @@ function checkMousePos() {
 //draws the monstermon on battle scene
 function drawMonsterMon() {
     ctx.drawImage(
-        playerImg, // image file source
+        fightImg, // image file source
         0, 
-        32, // function uses the same properties as in drawMap()
+        3 * player.tileSize, // function uses the same properties as in drawMap()
         player.tileSize,
         player.tileSize,
         4 * player.tileSize,
