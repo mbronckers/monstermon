@@ -22,8 +22,12 @@ playerImg.src = "Graphics/user.png"// file path to external texture files
 
 var PokeMart = 64;
 
-var map = {cols: 16, rows: 16, tileSize: 16,
-    tiles: [
+var alpha = {cols: 16, rows: 16, tileSize: 16,
+    first: [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1],
+        [1, 2, 2, 2, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 3, 3, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 30, 30, 0, 0, 0, 0, 1],
         [1, 0, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0, 0, 0, 0, 1],
         [1, 0, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0, 0, 0, 0, 1],
         [1, 0, 30, 30, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1],
@@ -39,9 +43,9 @@ var map = {cols: 16, rows: 16, tileSize: 16,
 
     ], 
     second: [
-    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 64, 0, 0, 0, 0, 0, 0],
-    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, 64, -1, -1, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1, 0, 0, 0, 0],
+    	[0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1, 0, 0, 0, 0],
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -57,7 +61,7 @@ var map = {cols: 16, rows: 16, tileSize: 16,
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ],
     getTile: function(row, col) {
-        return this.tiles[row][col];
+        return this.first[row][col];
     },
     getTileSecond: function(row, col) {
     	return this.second[row][col];
@@ -65,7 +69,7 @@ var map = {cols: 16, rows: 16, tileSize: 16,
 };
 
 var beta = {cols: 16, rows: 16, tileSize: 16,
-    tiles: [
+    first: [
     	[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     	[1, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     	[1, 2, 2, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -102,7 +106,7 @@ var beta = {cols: 16, rows: 16, tileSize: 16,
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ],
     getTile: function(row, col) {
-        return this.tiles[row][col];
+        return this.first[row][col];
     },
     getTileSecond: function(row, col) {
     	return this.second[row][col];
@@ -137,8 +141,8 @@ function drawMap() {
                         (tile * player.map.tileSize), // the y coordinate of the image file to clip --> texture file tile's y position
                         player.map.tileSize, 		// the width of the clipped image --> texture file tile's width
                         player.map.tileSize,		// the height of the clipped image --> texture file tile's height
-                        c * (map.tileSize * 2), 	// x position of tile on canvas
-                        r * (map.tileSize * 2),	// y position of tile on canvas
+                        c * (player.map.tileSize * 2), 	// x position of tile on canvas
+                        r * (player.map.tileSize * 2),	// y position of tile on canvas
                         player.map.tileSize * 2,		// tile width
                         player.map.tileSize * 2		// tile height
                     );
@@ -166,7 +170,7 @@ function drawMap() {
     				);
     		}
 
-    		else if (tile != 0) { // a value of 0 in the second layer array means empty tile
+    		else if (tile != 0 && tile != -1) { // a value of 0 in the second layer array means empty tile, value 0f -1 is the pokeshop area
     			ctx.drawImage(
     				texture,
     				0,
@@ -192,8 +196,8 @@ function drawPlayer() {
             player.tileSize,
             player.x * player.tileSize,
             player.y * player.tileSize,
-            map.tileSize * 2,
-            map.tileSize * 2
+            player.tileSize ,
+            player.tileSize
             );
 }
 
@@ -207,32 +211,45 @@ function keyPressed(e) {
 		switch(e.keyCode) {
 			case KEY.W:
 			case KEY.UK:
+                player.orientation = 1;
                 if (moveCheck(1)) {
                     player.y -= 1;
-                    player.orientation = 1;
                 }
 				break;
 			case KEY.A:
 			case KEY.LK:
+                player.orientation = 4;
+                if (player.map == alpha && player.x == 0 && (player.y == 10 || player.y == 11)) {
+                    player.map = beta;
+                    player.x = 15;
+                    player.y = 5;
+                    return;
+                }
                 if (moveCheck(2)) {
 				    player.x -= 1;
-				    player.orientation = 4;
                 }
 				break;
 			case KEY.S:
 			case KEY.DK:
+                player.orientation = 3;
                 if (moveCheck(3)) {
 				    player.y += 1;
-				    player.orientation = 3;
                 }
 				break;
             case KEY.D:
 			case KEY.RK:
+                player.orientation = 2;
+                if (player.map == beta && player.x == 15 && player.y == 5) {
+                    player.map = alpha;
+                    player.x = 0;
+                    player.y = 10;
+                    return;
+                }
                 if (moveCheck(4)) {
 				    player.x += 1;
-				    player.orientation = 2;
                 }
             }
+        console.log(player.y + " " + player.x);
 }
 
 
@@ -240,7 +257,7 @@ function keyPressed(e) {
 Player
 ----------------------------------------*/
 
-var player = {x: 5, y: 5, orientation: 1, tileSize: 32, map: map, backpack: [], hp: 100, money: 0}
+var player = {x: 5, y: 5, orientation: 1, tileSize: 32, map: alpha, backpack: [], hp: 100, money: 0}
 
 
 /* --------------------------------------
