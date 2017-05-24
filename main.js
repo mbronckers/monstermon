@@ -16,12 +16,13 @@ Graphic variables
 ----------------------------------------*/
 
 var texture = new Image();
-texture.src = "Graphics/TexturePack.png"; 
+texture.src = "Graphics/TexturePack.png"; // file path to external texture file
 var playerImg = new Image();
-playerImg.src = "Graphics/user.png"// file path to external texture files
+playerImg.src = "Graphics/user.png"// file path to external player graphics file
 
 var MonsterMart = 64; // tile number for the MonsterMart, a building on the canvas
 
+// alpha is the initial main map for the player
 var alpha = {cols: 16, rows: 16, tileSize: 16,
     first: [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1],
@@ -69,8 +70,9 @@ var alpha = {cols: 16, rows: 16, tileSize: 16,
     }
 };
 
+// beta is the second map when you go left from alpha
 var beta = {cols: 16, rows: 16, tileSize: 16,
-    first: [
+    first: [ // first layer for background
     	[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     	[1, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     	[1, 2, 2, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -88,7 +90,7 @@ var beta = {cols: 16, rows: 16, tileSize: 16,
     	[1, 31, 31, 31, 31, 31, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
     	[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     ], 
-    second: [
+    second: [ // second layer for additional items to be displayed on top of background
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -119,7 +121,6 @@ window.onload = function() {
     canvas = document.getElementById("game");
     ctx = canvas.getContext("2d");
     
-
     setInterval(function() {
         canvas.width = canvas.width;
         drawMap();
@@ -201,7 +202,7 @@ function drawPlayer() {
         ctx.drawImage(
             playerImg, // image file source
             0, 
-            (player.orientation - 1) * player.tileSize,
+            (player.orientation - 1) * player.tileSize, // function uses the same properties as in drawMap()
             player.tileSize,
             player.tileSize,
             player.x * player.tileSize,
@@ -229,7 +230,7 @@ function keyPressed(e) {
 			case KEY.A:
 			case KEY.LK:
                 player.orientation = 4;
-                if (player.map == alpha && player.x == 0 && (player.y == 10 || player.y == 11)) {
+                if (player.map == alpha && player.x == 0 && (player.y == 10 || player.y == 11)) { // movement to left map
                     player.map = beta;
                     player.x = 15;
                     player.y = 5;
@@ -249,7 +250,7 @@ function keyPressed(e) {
             case KEY.D:
 			case KEY.RK:
                 player.orientation = 2;
-                if (player.map == beta && player.x == 15 && player.y == 5) {
+                if (player.map == beta && player.x == 15 && player.y == 5) { // movement to right map
                     player.map = alpha;
                     player.x = 0;
                     player.y = 10;
